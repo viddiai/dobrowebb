@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://dobro-renovering.stefanpeakmarketing.chatgpt.site/sitemap.xml
