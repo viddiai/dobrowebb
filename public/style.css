@@ -19,3 +19,14 @@ img{max-width:100%}main,.wrap,.hero>*,.split>*,.contact-grid>*,.cards>*,.guide-g
 
 /* Roof service imagery shares the site's architectural photo treatment. */
 .roof-hero{margin:0}.roof-hero img{object-position:center 42%}.roof-detail{gap:65px}.roof-detail figure{margin:0;min-width:0}.roof-detail figure img{display:block;width:100%;height:440px;object-fit:cover;border-radius:6px}.roof-detail figcaption{font-size:.8rem;line-height:1.6;color:var(--muted);margin-top:12px}.roof-detail .detail-list{grid-template-columns:1fr;gap:0;margin-top:20px}.roof-detail .detail-list>div{padding:22px 0}@media(max-width:1000px){.roof-detail{gap:35px}.roof-detail figure img{height:380px}}@media(max-width:760px){.roof-detail{gap:30px}.roof-detail figure img{height:auto;aspect-ratio:1.2}.roof-detail figcaption{font-size:.875rem}.roof-hero .image-label{font-size:.78rem}}
+
+/* Kontaktformulär: samtycke, honeypot och statusmeddelanden */
+.form .consent{display:flex;gap:12px;align-items:flex-start;margin:4px 0 22px}
+.form .consent input{width:20px;height:20px;min-height:0;flex:none;margin:2px 0 0;padding:0;accent-color:var(--ink)}
+.form .consent label{font-weight:400;margin:0;line-height:1.5}
+.form .hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.form button[disabled]{opacity:.7;cursor:progress}
+.form #form-status:not(:empty){margin-top:16px;padding:12px 14px;border-radius:4px;background:var(--light);color:var(--ink)}
+.form #form-status[data-state="ok"]{background:#eaf5de}
+.form #form-status[data-state="error"]{background:#fbeaea;color:#7a1f1f}
+.form #form-status a{text-decoration:underline}

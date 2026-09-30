@@ -19,7 +19,6 @@ document.addEventListener('click',e=>{if(nav?.classList.contains('open')&&!nav.c
 const mobileNavigation=window.matchMedia('(max-width:1100px)');
 mobileNavigation.addEventListener('change',()=>setMenu(false));
 nav?.addEventListener('focusout',e=>{if(mobileNavigation.matches&&e.relatedTarget&&!nav.contains(e.relatedTarget)&&e.relatedTarget!==menu)setMenu(false)});
-document.querySelector('#request-form')?.addEventListener('submit',e=>{e.preventDefault();const {email,phone}=e.currentTarget.dataset;const f=new FormData(e.currentTarget);const body=`Hej Dobro!\n\nJag vill boka ett kostnadsfritt hembesök.\n\nProjekt: ${f.get('project')}\nNamn: ${f.get('name')}\nTelefon: ${f.get('phone')}\n\n${f.get('description')||''}`;const url=`mailto:${email}?subject=${encodeURIComponent('Förfrågan: '+f.get('project'))}&body=${encodeURIComponent(body)}`;window.location.href=url;const status=document.getElementById('form-status');status.replaceChildren(document.createTextNode('Din förfrågan är förberedd. Skicka mejlet i ditt e-postprogram. Om inget öppnas kan du '));const a=document.createElement('a');a.href=url;a.textContent='öppna e-postutkastet igen';a.style.textDecoration='underline';status.append(a,document.createTextNode(` eller ringa ${phone}. Inget har skickats från webbsidan.`));});
 const projectAnimations = new Map();
 function stopProjectMotion(){
  projectAnimations.forEach(animation=>animation.cancel());

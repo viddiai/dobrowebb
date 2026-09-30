@@ -13,15 +13,16 @@ All text på sajten är på **svenska**.
 
 ## Teknik och kommandon
 
-- **Astro 7**, helt statisk output (ingen adapter, inga server-endpoints). Node ≥ 22.12.
+- **Astro 7** med `@astrojs/vercel`. Alla sidor är statiska; bara `src/pages/api/lead.ts`
+  (`prerender = false`) körs on-demand som Vercel-funktion. Node ≥ 22.12.
 - Hosting: **Vercel** (auto-detekterar Astro; `vercel.json` sätter `trailingSlash: true`).
+- Byggutdata hamnar i `.vercel/output/` (statiska filer i `static/`, funktionen i `functions/`).
 - Inga UI-ramverk, ingen Tailwind. CSS och JS är handskrivna och ligger i `public/`.
 
 ```bash
 npm install
 npm run dev      # utvecklingsserver, http://localhost:4321
-npm run build    # bygger till dist/
-npm run preview  # servera dist/ lokalt
+npm run build    # bygger till .vercel/output/
 npm run check    # astro check (typer + .astro-filer) – ska ge 0 fel
 npm run format   # prettier (inkl. .astro)
 ```
@@ -31,14 +32,14 @@ Kör alltid `npm run check` och `npm run build` innan commit.
 ## Struktur
 
 ```
-astro.config.mjs          site-URL (domän), trailingSlash, sitemap
+astro.config.mjs          site-URL (domän), trailingSlash, sitemap, Vercel-adapter, env-schema
 src/config.ts             Företagsuppgifter: namn, telefon, e-post, områden (JSON-LD)
 src/content.config.ts     Scheman för innehållssamlingarna projekt + blogg
 src/layouts/BaseLayout.astro   <head>, SEO-taggar, JSON-LD, Header, Footer, scripts
 src/components/
   Header.astro            Topbar + huvudmeny (inkl. tjänste-dropdown)
   Footer.astro
-  ContactSection.astro    Kontaktsektion + formulär #request-form
+  ContactSection.astro    Kontaktsektion + formulär #request-form (+ skript som postar till /api/lead/)
   FaqSection.astro        Gemensam FAQ (data i src/data/faq.ts)
   CaseCard.astro          Projektkort (projektlista + "Fler hem")
 src/data/faq.ts           FAQ-frågor – visas på sidan OCH i FAQPage-JSON-LD
@@ -48,6 +49,7 @@ src/content/blogg/*.md    En guide per fil
 src/pages/                En .astro per sida; URL = mappnamn (/kontakt/ = pages/kontakt/index.astro)
   projekt/[slug].astro    Mall för projekt-case
   blogg/[slug].astro      Mall för guider
+  api/lead.ts             Tar emot formuläret och skickar signerat lead till Dobro Lead Hub
   404.astro, robots.txt.ts
 public/                   style.css, motion.css, script.js, motion.js, assets/*.webp
 ```
@@ -129,14 +131,29 @@ Sitemap (`/sitemap-index.xml`) och `robots.txt` genereras vid build. 404-sidan h
 - Företagsuppgifter (telefon, e-post) hämtas från `src/config.ts` – skriv inte in dem på nytt i
   komponenter. Löptext på enskilda sidor kan nämna dem; sök igenom `src/` vid ändring.
 
-## Formuläret
+## Formuläret och Dobro Lead Hub
 
-`#request-form` (i `ContactSection.astro`) skickar **inget till någon server** idag. `public/script.js`
-bygger en `mailto:`-länk med projekt, namn, telefon och beskrivning (mottagare och telefon läses från
-formulärets `data-email`/`data-phone`) och öppnar användarens e-postprogram. Texterna säger uttryckligen
-att inget skickas förrän användaren skickar mejlet – ändra dem när formuläret kopplas till en backend.
+Flöde: `#request-form` (i `ContactSection.astro`) → skriptet i samma komponent postar JSON med
+`fetch` till `/api/lead/` → `src/pages/api/lead.ts` validerar, bygger payload, signerar och skickar
+till `https://www.dobro-leads.se/api/leads/inbound`.
 
-**Planerat:** koppla formuläret till Dobro Lead Hub.
+- **Fält:** namn\*, telefon, e-post, "Vad gäller det?" (`division`: renovering/badrum/annat), adress,
+  ort, önskad start, budget, meddelande\*, GDPR-samtycke\*. Minst ett av telefon/e-post krävs.
+  Dolt honeypot-fält `website` skickas vidare oförändrat (Lead Hub filtrerar spam).
+- **Validering** sker både i webbläsaren och i endpointen. Endpointen svarar `{ ok: true }` (200),
+  `{ ok: false, errors }` (400), `{ ok: false }` (500 om nyckel saknas, 502/504 om Lead Hub fallerar).
+  Lead Hubs felsvar loggas server-side (Vercel → Logs, prefix `[lead]`).
+- **Signering:** `X-Dobro-Signature: sha256=<HMAC-SHA256(body, DOBRO_WEBHOOK_SECRET) i hex>` och
+  `Idempotency-Key: <uuid>`. Body-strängen som signeras är exakt den som skickas – bygg aldrig om den
+  mellan signering och `fetch`.
+- **Hemligheter** deklareras i `env.schema` i `astro.config.mjs` (`astro:env/server`, `access: "secret"`)
+  och läses vid körning. `DOBRO_WEBHOOK_SECRET` sätts i Vercel; `DOBRO_LEADS_URL` är valfri
+  (test/staging). Se `.env.example`. Nyckeln får aldrig hamna i klientkod eller byggutdata – kontrollera
+  med `grep -r <nyckel> .vercel/output` efter build om du ändrar i endpointen.
+- Ändras payloadens format: höj `formVersion` och stäm av med Lead Hub först.
+
+**Testa lokalt** utan att skicka riktiga leads: kör en mock-server som verifierar signaturen och
+starta `DOBRO_WEBHOOK_SECRET=test DOBRO_LEADS_URL=http://localhost:9999/... npm run dev`.
 
 ## Företagsfakta (håll konsekvent)
 
@@ -150,6 +167,7 @@ att inget skickas förrän användaren skickar mejlet – ändra dem när formul
 ## Kända problem / att göra
 
 - Tillfällig domän i `astro.config.mjs` (se SEO).
-- Formuläret är mailto-baserat – ingen leadsinsamling eller spårning (se Formuläret).
+- Samtyckestexten saknar länk till integritetspolicy – det finns ingen sådan sida än.
+- Ingen rate limiting på `/api/lead/` utöver honeypot (Lead Hub filtrerar spam).
 - Ingen analys/spårning (GA, pixel e.d.) installerad.
 - Texten "sju projekt" på `/projekt/` är hårdkodad – uppdatera vid nya case.
