@@ -1,0 +1,157 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import FaqSection from "../../components/FaqSection.astro";
+import ContactSection from "../../components/ContactSection.astro";
+---
+
+<BaseLayout
+  title="Totalrenovering i Göteborg"
+  description="Vi samordnar hantverkare, tidplan och kostnader – från rivning till slutbesiktning. Kök, badrum, golv och måleri får en gemensam riktning."
+  faq
+>
+  <div class="wrap breadcrumb">
+    <a href="/">Hem</a> / Totalrenovering
+  </div>
+  <section class="wrap hero subhero">
+    <div>
+      <span class="eyebrow">Totalrenovering · Göteborg</span>
+      <h1>
+        Hela hemmet.
+        <br /> En kontaktperson.
+      </h1>
+      <p class="intro">
+        Vi samordnar hantverkare, tidplan och kostnader – från rivning till slutbesiktning. Kök,
+        badrum, golv och måleri får en gemensam riktning.
+      </p>
+      <a class="button" href="/kontakt/">
+        Boka kostnadsfritt hembesök
+      </a>
+      <div class="checks">
+        <span>Gratis hembesök & 3D-ritning</span>
+        <span>Inte bindande</span>
+      </div>
+    </div>
+    <div class="heromedia">
+      <img
+        src="/assets/bathroom-detail.webp"
+        alt="Detalj från ett av Dobros färdiga hem"
+        width="1200"
+        height="900"
+      />
+      <span class="image-label">Detalj från ett Dobro-hem</span>
+    </div>
+  </section>
+  <section class="section soft">
+    <div class="wrap">
+      <span class="eyebrow">Samordning från start till mål</span>
+      <h2>
+        Genomtänkt före.
+        <br /> Omsorg hela vägen.
+      </h2>
+      <div class="detail-list">
+        <div>
+          <h3>En röd tråd genom hemmet</h3>
+          <p>
+            Planlösning, material, kulörer och detaljer planeras tillsammans, med respekt för
+            bostadens karaktär.
+          </p>
+        </div>
+        <div>
+          <h3>Du slipper samordningen</h3>
+          <p>Din projektledare håller ihop el, VVS, snickeri, kök, badrum och måleri.</p>
+        </div>
+        <div>
+          <h3>Följ både tid och budget</h3>
+          <p>Du får löpande status och kostnadsuppföljning. Vi lyfter förändringar i god tid.</p>
+        </div>
+        <div>
+          <h3>Ett ordentligt avslut</h3>
+          <p>
+            Vi går igenom projektet tillsammans vid slutbesiktningen och lämnar dokumentation och
+            garantibevis.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="section wrap">
+    <span class="eyebrow">Omfattning & möjligheter</span>
+    <h2>Kontroll på helheten, också under arbetet</h2>
+    <div class="detail-list">
+      <div>
+        <h3>Vad är gjort?</h3>
+        <p>
+          Du får löpande status om arbetet, inte bara en tidplan från projektstarten. Materialval
+          och godkännanden hålls samlade.
+        </p>
+      </div>
+      <div>
+        <h3>Vad är nästa steg?</h3>
+        <p>Projektledaren samordnar ordningen mellan el, VVS, snickeri, måleri, kök och badrum.</p>
+      </div>
+      <div>
+        <h3>Hur ligger kostnaden till?</h3>
+        <p>
+          Vi följer upp nedlagd kostnad och förväntat återstående arbete. Förändringar tas upp i god
+          tid.
+        </p>
+      </div>
+      <div>
+        <h3>Vad behöver du besluta?</h3>
+        <p>
+          När något behöver ändras får du veta vad det innebär för projektet. Tillägg kräver ditt
+          skriftliga godkännande.
+        </p>
+      </div>
+    </div>
+  </section>
+  <section class="service-next wrap">
+    <div>
+      <h3>Tydlig prisbild. Inget tillägg utan ditt godkännande.</h3>
+      <p>Läs hur vi går från hembesök till offert och löpande kostnadsuppföljning.</p>
+    </div>
+    <a class="button outline" href="/prisguide/">
+      Om pris & offert
+    </a>
+  </section>
+  <section class="section wrap" id="process">
+    <span class="eyebrow">En trygg väg hela vägen</span>
+    <h2>Från första tanke till sista detalj.</h2>
+    <div class="process">
+      <div>
+        <span class="num">01</span>
+        <h3>Vi kommer hem till dig</h3>
+        <p>
+          Vi tar mått, lyssnar på dina idéer och går igenom förutsättningarna. Hembesöket är
+          kostnadsfritt.
+        </p>
+      </div>
+      <div>
+        <span class="num">02</span>
+        <h3>Du ser det framför dig</h3>
+        <p>
+          3D-ritning, materialval och en tydlig offert. Du vet vad vi planerar, hur lång tid det tar
+          och vad det kostar.
+        </p>
+      </div>
+      <div>
+        <span class="num">03</span>
+        <h3>Vi tar hand om jobbet</h3>
+        <p>
+          Din projektledare samordnar hantverkarna. Du följer arbetet i kundportalen och vi städar
+          varje dag.
+        </p>
+      </div>
+      <div>
+        <span class="num">04</span>
+        <h3>Tillsammans går vi igenom allt</h3>
+        <p>
+          Slutbesiktning, dokumentation och skriftliga garantier. Med Dobro Aftercare finns vi kvar
+          även efteråt.
+        </p>
+      </div>
+    </div>
+  </section>
+  <FaqSection />
+  <ContactSection />
+</BaseLayout>

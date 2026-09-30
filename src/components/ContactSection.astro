@@ -1,0 +1,91 @@
+---
+import { COMPANY } from "../config";
+
+const projectTypes = [
+  "Badrumsrenovering",
+  "Köksrenovering",
+  "Totalrenovering",
+  "Snickeri & tillbyggnad",
+  "Måleri & fasad",
+  "Takbyte",
+  "Elinstallation",
+  "Annat projekt",
+];
+---
+
+<section class="section contact" id="kontakt">
+  <div class="wrap">
+    <div class="contact-grid">
+      <div>
+        <span class="eyebrow">Vi börjar med dina idéer</span>
+        <h2>
+          Ditt nästa kapitel
+          <br /> börjar hemma.
+        </h2>
+        <p>
+          Berätta vad du vill förändra. Vi återkommer inom en arbetsdag med nästa steg: ett
+          kostnadsfritt hembesök och en tydlig väg framåt.
+        </p>
+        <div class="checks">
+          <span>Kostnadsfritt & inte bindande</span>
+          <span>Gratis 3D-ritning</span>
+        </div>
+        <div class="contact-links">
+          <a href={`tel:${COMPANY.phoneE164}`}>{COMPANY.phone}</a>
+          <a href={`mailto:${COMPANY.email}`}>{COMPANY.email}</a>
+        </div>
+        <p>Måndag–fredag 07.00–17.00</p>
+      </div>
+      <form class="form" id="request-form" data-email={COMPANY.email} data-phone={COMPANY.phone}>
+        <h3 style="margin-bottom:24px">Vad drömmer du om?</h3>
+        <label for="project">Jag vill ha hjälp med</label>
+        <select id="project" name="project">
+          {projectTypes.map((type) => (
+            <option>{type}</option>
+          ))}
+        </select>
+        <div class="row">
+          <div>
+            <label for="name">Ditt namn</label>
+            <input
+              id="name"
+              name="name"
+              autocomplete="name"
+              required
+              placeholder="För- och efternamn"
+            />
+          </div>
+          <div>
+            <label for="phone">Telefonnummer</label>
+            <input
+              id="phone"
+              name="phone"
+              type="tel"
+              autocomplete="tel"
+              required
+              placeholder="070-123 45 67"
+              inputmode="tel"
+            />
+          </div>
+        </div>
+        <label for="description">Berätta kort om ditt projekt</label>
+        <textarea
+          id="description"
+          name="description"
+          placeholder="Vad vill du göra och var finns din bostad?"
+        ></textarea>
+        <button class="button dark" type="submit">
+          Förbered min förfrågan
+        </button>
+        <p class="note">
+          Nästa steg öppnar din e-post med uppgifterna ifyllda. Förfrågan skickas först när du själv
+          skickar mejlet.
+        </p>
+        <p id="form-status" class="note" role="status"></p>
+      </form>
+    </div>
+    <div class="areas">
+      Nära dig i Göteborg · Mölndal · Kungsbacka · Kungälv · Härryda · Lerum · Partille
+    </div>
+  </div>
+</section>

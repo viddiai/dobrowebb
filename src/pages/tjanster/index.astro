@@ -1,0 +1,114 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import ContactSection from "../../components/ContactSection.astro";
+---
+
+<BaseLayout
+  title="Renoveringstjänster i Göteborg"
+  description="Badrum, kök, totalrenovering, snickeri, måleri, tak och el – ett samordnat team från idé till färdigt hem."
+>
+  <section class="wrap editorial-head">
+    <span class="eyebrow">Dobros tjänster</span>
+    <h1>Ett hem. Många möjligheter.</h1>
+    <p>
+      Börja med rummet du vill förändra. Vi hjälper dig att planera, välja och samordna hela
+      arbetet.
+    </p>
+  </section>
+  <section class="section wrap" id="tjanster">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">Ett team. Alla möjligheter.</span>
+        <h2>
+          För rummen du lever i.
+          <br /> Och hemmet du drömmer om.
+        </h2>
+      </div>
+      <p>
+        Badrum är vår specialitet. Samma omsorg följer med i varje kök, varje rum och varje detalj.
+      </p>
+    </div>
+    <div class="cards">
+      <article class="card">
+        <a href="/badrumsrenovering/" aria-label="Läs om badrumsrenovering">
+          <div class="photo">
+            <img
+              src="/assets/bathroom-hero.webp"
+              alt="Badrumsrenovering – detaljer från Dobros eget projekt"
+              loading="lazy"
+              width="800"
+              height="650"
+            />
+          </div>
+        </a>
+        <div class="tag">Vår specialitet · 3–5 veckor</div>
+        <h3>Ett badrum att längta hem till.</h3>
+        <p>
+          BKR-certifierade hantverkare, golvvärme som standard och 10 års garanti på tätskiktet.
+        </p>
+        <a class="textlink" href="/badrumsrenovering/">
+          Upptäck badrumsrenovering
+        </a>
+      </article>
+      <article class="card">
+        <a href="/koksrenovering/" aria-label="Läs om köksrenovering">
+          <div class="photo">
+            <img
+              src="/assets/kitchen.webp"
+              alt="Köksrenovering – detaljer från Dobros eget projekt"
+              loading="lazy"
+              width="800"
+              height="650"
+            />
+          </div>
+        </a>
+        <div class="tag">Hemmets hjärta · cirka 5 veckor</div>
+        <h3>Mer plats för livet i köket.</h3>
+        <p>
+          Från första skiss till sista lampa. Vi tar hand om el, VVS och montering med 5 års garanti
+          på arbetet.
+        </p>
+        <a class="textlink" href="/koksrenovering/">
+          Upptäck köksrenovering
+        </a>
+      </article>
+      <article class="card">
+        <a href="/totalrenovering/" aria-label="Läs om totalrenovering">
+          <div class="photo">
+            <img
+              src="/assets/bathroom-detail.webp"
+              alt="Totalrenovering – detaljer från Dobros eget projekt"
+              loading="lazy"
+              width="800"
+              height="650"
+            />
+          </div>
+        </a>
+        <div class="tag">Ett projekt · en kontaktperson</div>
+        <h3>Hela hemmet. Ett enda team.</h3>
+        <p>
+          En projektledare samordnar hantverkare, tidplan och budget. Du får en röd tråd genom hela
+          hemmet.
+        </p>
+        <a class="textlink" href="/totalrenovering/">
+          Upptäck totalrenovering
+        </a>
+      </article>
+    </div>
+    <div class="extra-services">
+      <a href="/snickeri-tillbyggnad/">
+        Snickeri & tillbyggnad<small>Platsbyggt för ditt hem</small>
+      </a>
+      <a href="/maleri-fasadmalning/">
+        Måleri & fasad<small>Ett hållbart första intryck</small>
+      </a>
+      <a href="/takbyte/">
+        Takbyten<small>Trygghet från toppen</small>
+      </a>
+      <a href="/elinstallation/">
+        Elinstallation<small>Från belysning till laddbox</small>
+      </a>
+    </div>
+  </section>
+  <ContactSection />
+</BaseLayout>

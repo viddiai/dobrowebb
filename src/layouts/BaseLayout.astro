@@ -1,0 +1,87 @@
+---
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import { COMPANY } from "../config";
+import { faq as faqItems } from "../data/faq";
+
+interface Props {
+  /** Sidans rubrik utan " | Dobro Byggkonsult" – används i title, og:title och JSON-LD. */
+  title: string;
+  description: string;
+  /** Lägg till FAQPage i JSON-LD. Sätt när sidan visar <FaqSection />. */
+  faq?: boolean;
+  /** Utesluts från sökmotorer (t.ex. 404). */
+  noindex?: boolean;
+}
+
+const { title, description, faq = false, noindex = false } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      name: title,
+      description,
+      inLanguage: "sv",
+      url: canonical,
+    },
+    {
+      "@type": "HomeAndConstructionBusiness",
+      name: COMPANY.legalName,
+      telephone: COMPANY.phoneE164,
+      email: COMPANY.email,
+      areaServed: COMPANY.areaServed,
+    },
+    ...(faq
+      ? [
+          {
+            "@type": "FAQPage",
+            mainEntity: faqItems.map((item) => ({
+              "@type": "Question",
+              name: item.question,
+              acceptedAnswer: { "@type": "Answer", text: item.answer },
+            })),
+          },
+        ]
+      : []),
+  ],
+};
+
+const favicon =
+  "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23142e37'/%3E%3Ctext x='15' y='48' font-family='Arial' font-weight='bold' font-size='51' fill='%23c5e6a4'%3Ed%3C/text%3E%3C/svg%3E";
+---
+
+<!doctype html>
+<html lang="sv">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>{title} | {COMPANY.name}</title>
+    <meta name="description" content={description} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    {noindex && <meta name="robots" content="noindex" />}
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/svg+xml" href={favicon} />
+    <link rel="stylesheet" href="/style.css" />
+    <link rel="stylesheet" href="/motion.css" />
+    <script
+      is:inline
+      type="application/ld+json"
+      set:html={JSON.stringify(jsonLd).replace(/</g, "\\u003c")}
+    />
+    <script is:inline src="/script.js" defer></script>
+    <script is:inline src="/motion.js" defer></script>
+  </head>
+  <body>
+    <Header />
+    <main>
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

@@ -1,0 +1,165 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import FaqSection from "../../components/FaqSection.astro";
+import ContactSection from "../../components/ContactSection.astro";
+---
+
+<BaseLayout
+  title="Köksrenovering i Göteborg"
+  description="Ditt drömkök på cirka 5 veckor. Ett team tar hand om rivning, el, VVS, montering och belysning. Du får 3D-ritning innan start och 5 års garanti på arbetet."
+  faq
+>
+  <div class="wrap breadcrumb">
+    <a href="/">Hem</a> / Köksrenovering
+  </div>
+  <section class="wrap hero subhero">
+    <div>
+      <span class="eyebrow">Köksrenovering · Göteborg</span>
+      <h1>
+        Ett nytt kök.
+        <br /> Mer plats för livet.
+      </h1>
+      <p class="intro">
+        Ditt drömkök på cirka 5 veckor. Ett team tar hand om rivning, el, VVS, montering och
+        belysning. Du får 3D-ritning innan start och 5 års garanti på arbetet.
+      </p>
+      <a class="button" href="/kontakt/">
+        Boka kostnadsfritt hembesök
+      </a>
+      <div class="checks">
+        <span>Gratis hembesök & 3D-ritning</span>
+        <span>Inte bindande</span>
+      </div>
+    </div>
+    <div class="heromedia">
+      <img
+        src="/assets/kitchen.webp"
+        alt="Detalj från ett av Dobros färdiga hem"
+        width="1200"
+        height="900"
+      />
+      <span class="image-label">Detalj från ett Dobro-hem</span>
+    </div>
+  </section>
+  <section class="section soft">
+    <div class="wrap">
+      <span class="eyebrow">5 års garanti på arbetet</span>
+      <h2>
+        Genomtänkt före.
+        <br /> Omsorg hela vägen.
+      </h2>
+      <div class="detail-list">
+        <div>
+          <h3>Form som fungerar</h3>
+          <p>
+            Smart förvaring, bra arbetsytor och rätt placering gör vardagen enklare. Vi planerar
+            utifrån hur du använder köket.
+          </p>
+        </div>
+        <div>
+          <h3>Ett team tar hela jobbet</h3>
+          <p>
+            Ingen jakt på elektriker, rörmokare och snickare. Vi samordnar alla moment och tar
+            ansvar för helheten.
+          </p>
+        </div>
+        <div>
+          <h3>Dina material. Vår erfarenhet.</h3>
+          <p>
+            Vi går igenom luckor, bänkskivor, vitvaror och belysning i personliga inredningsmöten.
+          </p>
+        </div>
+        <div>
+          <h3>Kontroll över kostnaderna</h3>
+          <p>
+            Du får en tydlig prisbild och löpande uppföljning. Ändringar och tillägg godkänns av dig
+            innan de utförs.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="section wrap">
+    <span class="eyebrow">Omfattning & möjligheter</span>
+    <h2>Ett kök planerat kring din vardag</h2>
+    <div class="detail-list">
+      <div>
+        <h3>Arbetsytor som räcker</h3>
+        <p>
+          Vi börjar med hur du lagar mat, förvarar och umgås. Placering av arbetsytor, vitvaror och
+          förvaring planeras tillsammans.
+        </p>
+      </div>
+      <div>
+        <h3>Material med en gemensam riktning</h3>
+        <p>
+          Luckor, bänkskiva, beslag och belysning väljs som en helhet. Du ser förslaget i en
+          3D-ritning innan vi river.
+        </p>
+      </div>
+      <div>
+        <h3>Installationerna samordnas</h3>
+        <p>
+          Rivning, el, VVS, montering och belysning hålls ihop av en projektledare. Du slipper boka
+          och samordna varje hantverkare.
+        </p>
+      </div>
+      <div>
+        <h3>Ett färdigt kök att använda</h3>
+        <p>
+          Vid överlämningen går vi igenom arbetet, vitvarorna och dokumentationen. Du får 5 års
+          garanti på köksarbetet.
+        </p>
+      </div>
+    </div>
+  </section>
+  <section class="service-next wrap">
+    <div>
+      <h3>Tydlig prisbild. Inget tillägg utan ditt godkännande.</h3>
+      <p>Läs hur vi går från hembesök till offert och löpande kostnadsuppföljning.</p>
+    </div>
+    <a class="button outline" href="/prisguide/">
+      Om pris & offert
+    </a>
+  </section>
+  <section class="section wrap" id="process">
+    <span class="eyebrow">En trygg väg hela vägen</span>
+    <h2>Från första tanke till sista detalj.</h2>
+    <div class="process">
+      <div>
+        <span class="num">01</span>
+        <h3>Vi kommer hem till dig</h3>
+        <p>
+          Vi tar mått, lyssnar på dina idéer och går igenom förutsättningarna. Hembesöket är
+          kostnadsfritt.
+        </p>
+      </div>
+      <div>
+        <span class="num">02</span>
+        <h3>Du ser det framför dig</h3>
+        <p>
+          3D-ritning, materialval och en tydlig offert. Du vet vad vi planerar, hur lång tid det tar
+          och vad det kostar.
+        </p>
+      </div>
+      <div>
+        <span class="num">03</span>
+        <h3>Vi tar hand om jobbet</h3>
+        <p>
+          Din projektledare samordnar hantverkarna. Du följer arbetet i kundportalen och vi städar
+          varje dag.
+        </p>
+      </div>
+      <div>
+        <span class="num">04</span>
+        <h3>Tillsammans går vi igenom allt</h3>
+        <p>
+          Slutbesiktning, dokumentation och skriftliga garantier. Med Dobro Aftercare finns vi kvar
+          även efteråt.
+        </p>
+      </div>
+    </div>
+  </section>
+  <FaqSection />
+  <ContactSection />
+</BaseLayout>
