@@ -1,0 +1,24 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import FaqSection from "../../components/FaqSection.astro";
+import ContactSection from "../../components/ContactSection.astro";
+---
+
+<BaseLayout
+  title="Kontakta Dobro – boka kostnadsfritt hembesök"
+  description="Berätta om din renovering. Ring 073-985 70 94 eller förbered din förfrågan. Vi återkommer inom en arbetsdag."
+  faq
+>
+  <div class="wrap breadcrumb">
+    <a href="/">Hem</a> / Kontakt
+  </div>
+  <section class="wrap" style="padding:45px 0 55px">
+    <span class="eyebrow">Kontakt · Dobro Byggkonsult</span>
+    <h1>
+      Berätta om ditt hem.
+      <br /> Vi tar nästa steg tillsammans.
+    </h1>
+  </section>
+  <ContactSection />
+  <FaqSection />
+</BaseLayout>

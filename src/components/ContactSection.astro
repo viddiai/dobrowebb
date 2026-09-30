@@ -1,0 +1,242 @@
+---
+import { COMPANY } from "../config";
+
+const divisions = [
+  { value: "renovering", label: "Renovering" },
+  { value: "badrum", label: "Badrum" },
+  { value: "annat", label: "Annat" },
+];
+
+const timelines = [
+  "Så snart som möjligt",
+  "Inom 3 månader",
+  "Om 3–6 månader",
+  "Om mer än 6 månader",
+  "Vet inte än",
+];
+---
+
+<section class="section contact" id="kontakt">
+  <div class="wrap">
+    <div class="contact-grid">
+      <div>
+        <span class="eyebrow">Vi börjar med dina idéer</span>
+        <h2>
+          Ditt nästa kapitel
+          <br /> börjar hemma.
+        </h2>
+        <p>
+          Berätta vad du vill förändra. Vi återkommer inom en arbetsdag med nästa steg: ett
+          kostnadsfritt hembesök och en tydlig väg framåt.
+        </p>
+        <div class="checks">
+          <span>Kostnadsfritt & inte bindande</span>
+          <span>Gratis 3D-ritning</span>
+        </div>
+        <div class="contact-links">
+          <a href={`tel:${COMPANY.phoneE164}`}>{COMPANY.phone}</a>
+          <a href={`mailto:${COMPANY.email}`}>{COMPANY.email}</a>
+        </div>
+        <p>Måndag–fredag 07.00–17.00</p>
+      </div>
+      <form
+        class="form"
+        id="request-form"
+        action="/api/lead/"
+        method="post"
+        data-phone={COMPANY.phone}
+        data-phone-href={`tel:${COMPANY.phoneE164}`}
+      >
+        <h3 style="margin-bottom:24px">Vad drömmer du om?</h3>
+        <div class="row">
+          <div>
+            <label for="name">Ditt namn *</label>
+            <input
+              id="name"
+              name="name"
+              autocomplete="name"
+              required
+              maxlength="200"
+              placeholder="För- och efternamn"
+            />
+          </div>
+          <div>
+            <label for="phone">Telefonnummer</label>
+            <input
+              id="phone"
+              name="phone"
+              type="tel"
+              autocomplete="tel"
+              maxlength="50"
+              placeholder="070-123 45 67"
+              inputmode="tel"
+            />
+          </div>
+        </div>
+        <div class="row">
+          <div>
+            <label for="email">E-post</label>
+            <input
+              id="email"
+              name="email"
+              type="email"
+              autocomplete="email"
+              maxlength="200"
+              placeholder="namn@exempel.se"
+            />
+          </div>
+          <div>
+            <label for="division">Vad gäller det?</label>
+            <select id="division" name="division">
+              <option value="">Välj…</option>
+              {divisions.map((d) => (
+                <option value={d.value}>{d.label}</option>
+              ))}
+            </select>
+          </div>
+        </div>
+        <div class="row">
+          <div>
+            <label for="address">Adress</label>
+            <input
+              id="address"
+              name="address"
+              autocomplete="street-address"
+              maxlength="200"
+              placeholder="Gatuadress"
+            />
+          </div>
+          <div>
+            <label for="city">Ort</label>
+            <input
+              id="city"
+              name="city"
+              autocomplete="address-level2"
+              maxlength="100"
+              placeholder="T.ex. Mölndal"
+            />
+          </div>
+        </div>
+        <div class="row">
+          <div>
+            <label for="timeline">Önskad start</label>
+            <select id="timeline" name="timeline">
+              <option value="">Välj…</option>
+              {timelines.map((t) => (
+                <option>{t}</option>
+              ))}
+            </select>
+          </div>
+          <div>
+            <label for="budget">Budget (kr)</label>
+            <input
+              id="budget"
+              name="budget"
+              inputmode="numeric"
+              maxlength="20"
+              placeholder="T.ex. 250 000"
+            />
+          </div>
+        </div>
+        <label for="message">Berätta om ditt projekt *</label>
+        <textarea
+          id="message"
+          name="message"
+          required
+          maxlength="5000"
+          placeholder="Vad vill du göra och vad är viktigt för dig?"
+        ></textarea>
+        <div class="consent">
+          <input id="consent" name="consent" type="checkbox" required />
+          <label for="consent">
+            Jag godkänner att {COMPANY.legalName} sparar mina uppgifter för att kunna återkomma om
+            min förfrågan. *
+          </label>
+        </div>
+        <div class="hp" aria-hidden="true">
+          <label for="website">Lämna fältet tomt</label>
+          <input id="website" name="website" type="text" tabindex="-1" autocomplete="off" />
+        </div>
+        <button class="button dark" type="submit">
+          Skicka förfrågan
+        </button>
+        <p class="note">
+          Fält märkta * är obligatoriska. Ange telefonnummer eller e-post så att vi kan nå dig.
+        </p>
+        <p id="form-status" class="note" role="status"></p>
+      </form>
+    </div>
+    <div class="areas">
+      Nära dig i Göteborg · Mölndal · Kungsbacka · Kungälv · Härryda · Lerum · Partille
+    </div>
+  </div>
+</section>
+
+<script>
+  const form = document.querySelector<HTMLFormElement>("#request-form");
+  const status = document.querySelector<HTMLElement>("#form-status");
+
+  if (form && status) {
+    const button = form.querySelector<HTMLButtonElement>('button[type="submit"]')!;
+    const phone = form.querySelector<HTMLInputElement>("#phone")!;
+    const email = form.querySelector<HTMLInputElement>("#email")!;
+    const buttonText = button.textContent;
+    let sending = false;
+
+    // Minst ett av telefon/e-post krävs.
+    const checkContact = () =>
+      phone.setCustomValidity(
+        phone.value.trim() || email.value.trim() ? "" : "Ange telefonnummer eller e-post.",
+      );
+    phone.addEventListener("input", checkContact);
+    email.addEventListener("input", checkContact);
+
+    const show = (message: string, state: "ok" | "error", withPhone = false) => {
+      status.dataset.state = state;
+      status.replaceChildren(document.createTextNode(message));
+      if (withPhone) {
+        const link = document.createElement("a");
+        link.href = form.dataset.phoneHref ?? "";
+        link.textContent = form.dataset.phone ?? "";
+        status.append(link, document.createTextNode("."));
+      }
+    };
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      if (sending) return;
+      checkContact();
+      if (!form.reportValidity()) return;
+
+      const data = Object.fromEntries(new FormData(form));
+      sending = true;
+      button.disabled = true;
+      button.textContent = "Skickar…";
+      form.setAttribute("aria-busy", "true");
+      status.replaceChildren();
+
+      try {
+        const response = await fetch(form.action, {
+          method: "POST",
+          headers: { "Content-Type": "application/json", Accept: "application/json" },
+          body: JSON.stringify({ ...data, consent: data.consent === "on" }),
+        });
+        const result = await response.json().catch(() => ({ ok: false }));
+        if (!result.ok) throw new Error(`Status ${response.status}`);
+        form.reset();
+        show("Tack! Vi har tagit emot din förfrågan och återkommer inom en arbetsdag.", "ok");
+      } catch {
+        show(
+          "Något gick fel och förfrågan skickades inte. Försök igen eller ring oss på ",
+          "error",
+          true,
+        );
+      } finally {
+        sending = false;
+        button.disabled = false;
+        button.textContent = buttonText;
+        form.removeAttribute("aria-busy");
+      }
+    });
+  }
+</script>

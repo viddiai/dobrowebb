@@ -1,0 +1,46 @@
+---
+import { COMPANY } from "../config";
+---
+
+<footer class="footer">
+  <div class="wrap">
+    <div>
+      <div>
+        <a class="brand" href="/">
+          dobro<span>BYGGKONSULT</span>
+        </a>
+        <p>
+          Genomtänkta hem. Ordentligt hantverk.
+          <br /> Din renoveringspartner i Göteborg med omnejd.
+        </p>
+      </div>
+      <div class="footlinks">
+        <div>
+          <b>Upptäck Dobro</b>
+          <a href="/badrumsrenovering/">Badrumsrenovering</a>
+          <a href="/koksrenovering/">Köksrenovering</a>
+          <a href="/totalrenovering/">Totalrenovering</a>
+          <a href="/projekt/">Våra projekt</a>
+          <a href="/blogg/">Renoveringsguider</a>
+          <a href="/prisguide/">Pris & offert</a>
+          <a href="/vara-omraden/">Våra områden</a>
+        </div>
+        <div>
+          <b>Prata med oss</b>
+          <a href={`tel:${COMPANY.phoneE164}`}>{COMPANY.phone}</a>
+          <a href={`mailto:${COMPANY.email}`}>{COMPANY.email}</a>
+          <a href="/kontakt/">Mölnlycke, Göteborg</a>
+          <span>Mån–fre 07.00–17.00</span>
+          <a href="/kundportal/">Kundportalen</a>
+          <a href="/dobro-aftercare/">Dobro Aftercare</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>
+        © {new Date().getFullYear()} {COMPANY.legalName}
+      </span>
+      <span>Göteborg · Mölndal · Kungsbacka · Härryda · Partille · Lerum · Kungälv</span>
+    </div>
+  </div>
+</footer>

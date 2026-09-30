@@ -1,0 +1,162 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import FaqSection from "../../components/FaqSection.astro";
+import ContactSection from "../../components/ContactSection.astro";
+---
+
+<BaseLayout
+  title="Takbyten i Göteborg"
+  description="Vi bedömer takets skick kostnadsfritt och går igenom vad som behöver göras. Från planering till omläggning och plåtarbeten."
+  faq
+>
+  <div class="wrap breadcrumb">
+    <a href="/">Hem</a> / Takbyten
+  </div>
+  <section class="wrap hero subhero">
+    <div>
+      <span class="eyebrow">Takbyten · Göteborg</span>
+      <h1>
+        Trygghet.
+        <br /> Hela vägen upp.
+      </h1>
+      <p class="intro">
+        Vi bedömer takets skick kostnadsfritt och går igenom vad som behöver göras. Från planering
+        till omläggning och plåtarbeten.
+      </p>
+      <a class="button" href="/kontakt/">
+        Boka kostnadsfritt hembesök
+      </a>
+      <div class="checks">
+        <span>Gratis hembesök & 3D-ritning</span>
+        <span>Inte bindande</span>
+      </div>
+    </div>
+    <figure class="heromedia roof-hero">
+      <img
+        src="/assets/takbyte-villa.webp"
+        srcset="/assets/takbyte-villa-mobil.webp 720w, /assets/takbyte-villa.webp 1122w"
+        sizes="(max-width: 760px) calc(100vw - 40px), (max-width: 1450px) 44vw, 630px"
+        alt="Illustration av en skandinavisk villa med ett nytt mörkt tegeltak"
+        width="1122"
+        height="1402"
+        fetchpriority="high"
+      />
+      <figcaption class="image-label">
+        Ett genomtänkt tak för hela hemmet · Illustrationsbild
+      </figcaption>
+    </figure>
+  </section>
+  <section class="section soft">
+    <div class="wrap split roof-detail">
+      <figure>
+        <img
+          src="/assets/takbyte-detalj.webp"
+          srcset="/assets/takbyte-detalj-mobil.webp 720w, /assets/takbyte-detalj.webp 1536w"
+          sizes="(max-width: 760px) calc(100vw - 40px), (max-width: 1450px) 44vw, 630px"
+          alt="Illustration av mörka takpannor, takfot och plåtdetaljer"
+          width="1536"
+          height="1024"
+          loading="lazy"
+        />
+        <figcaption>Omsorg i mötet mellan material och detaljer. Illustrationsbild.</figcaption>
+      </figure>
+      <div>
+        <span class="eyebrow">Ett väl omhändertaget hem</span>
+        <h2>
+          Genomtänkt före.
+          <br /> Omsorg hela vägen.
+        </h2>
+        <div class="detail-list">
+          <div>
+            <h3>Börja med en bedömning</h3>
+            <p>Vi tittar på takets förutsättningar och går igenom behovet av åtgärder med dig.</p>
+          </div>
+          <div>
+            <h3>Tydlig omfattning</h3>
+            <p>
+              Du får veta vilka arbeten som planeras, hur tidplanen ser ut och hur kostnaderna följs
+              upp.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="section wrap">
+    <span class="eyebrow">Omfattning & möjligheter</span>
+    <h2>Börja med att förstå takets skick</h2>
+    <div class="detail-list">
+      <div>
+        <h3>Kostnadsfri bedömning</h3>
+        <p>
+          Vi går igenom takets synliga skick och lyssnar på vad du har märkt. Därefter planerar vi
+          nästa steg.
+        </p>
+      </div>
+      <div>
+        <h3>Omfattning & material</h3>
+        <p>Vi beskriver vilka delar som behöver åtgärdas och går igenom valen för ditt hus.</p>
+      </div>
+      <div>
+        <h3>Omläggning & plåtarbeten</h3>
+        <p>Arbetena samordnas med en tydlig plan och ansvarig kontaktperson.</p>
+      </div>
+      <div>
+        <h3>Förändrade förutsättningar</h3>
+        <p>
+          Om vi upptäcker mer arbete än väntat går vi igenom omfattning och kostnad innan tillägget
+          utförs.
+        </p>
+      </div>
+    </div>
+  </section>
+  <section class="service-next wrap">
+    <div>
+      <h3>Tydlig prisbild. Inget tillägg utan ditt godkännande.</h3>
+      <p>Läs hur vi går från hembesök till offert och löpande kostnadsuppföljning.</p>
+    </div>
+    <a class="button outline" href="/prisguide/">
+      Om pris & offert
+    </a>
+  </section>
+  <section class="section wrap" id="process">
+    <span class="eyebrow">En trygg väg hela vägen</span>
+    <h2>Från första tanke till sista detalj.</h2>
+    <div class="process">
+      <div>
+        <span class="num">01</span>
+        <h3>Vi kommer hem till dig</h3>
+        <p>
+          Vi tar mått, lyssnar på dina idéer och går igenom förutsättningarna. Hembesöket är
+          kostnadsfritt.
+        </p>
+      </div>
+      <div>
+        <span class="num">02</span>
+        <h3>Du ser det framför dig</h3>
+        <p>
+          3D-ritning, materialval och en tydlig offert. Du vet vad vi planerar, hur lång tid det tar
+          och vad det kostar.
+        </p>
+      </div>
+      <div>
+        <span class="num">03</span>
+        <h3>Vi tar hand om jobbet</h3>
+        <p>
+          Din projektledare samordnar hantverkarna. Du följer arbetet i kundportalen och vi städar
+          varje dag.
+        </p>
+      </div>
+      <div>
+        <span class="num">04</span>
+        <h3>Tillsammans går vi igenom allt</h3>
+        <p>
+          Slutbesiktning, dokumentation och skriftliga garantier. Med Dobro Aftercare finns vi kvar
+          även efteråt.
+        </p>
+      </div>
+    </div>
+  </section>
+  <FaqSection />
+  <ContactSection />
+</BaseLayout>

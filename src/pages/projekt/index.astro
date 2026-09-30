@@ -1,0 +1,47 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import ContactSection from "../../components/ContactSection.astro";
+import CaseCard from "../../components/CaseCard.astro";
+import { getProjects } from "../../data/projekt";
+
+const projects = await getProjects();
+---
+
+<BaseLayout
+  title="Renoveringsprojekt – badrum, kök & hela hem"
+  description="Se sju projekt från Dobro i Majorna, Haga, Askim, Linnéstaden, Mölndal och Göteborg."
+>
+  <section class="wrap editorial-head">
+    <span class="eyebrow">Utvalda projekt · Göteborg med omnejd</span>
+    <h1>
+      Från idé till
+      <br /> ett hem att trivas i.
+    </h1>
+    <p>
+      Badrum, kök och totalrenoveringar. Utforska sju projekt med olika förutsättningar, material
+      och uttryck.
+    </p>
+  </section>
+  <section class="wrap section" style="padding-top:0">
+    <div class="project-filter" aria-label="Filtrera projekt">
+      <button type="button" data-filter="Alla" aria-pressed="true">
+        Alla
+      </button>
+      <button type="button" data-filter="Badrum" aria-pressed="false">
+        Badrum
+      </button>
+      <button type="button" data-filter="Kök" aria-pressed="false">
+        Kök
+      </button>
+      <button type="button" data-filter="Totalrenovering" aria-pressed="false">
+        Totalrenovering
+      </button>
+    </div>
+    <div class="guide-grid" id="project-grid">
+      {projects.map((project) => (
+        <CaseCard project={project} />
+      ))}
+    </div>
+  </section>
+  <ContactSection />
+</BaseLayout>

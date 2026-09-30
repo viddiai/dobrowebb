@@ -1,0 +1,32 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
+import ContactSection from "../../components/ContactSection.astro";
+
+const guides = (await getCollection("blogg")).sort((a, b) => a.data.order - b.data.order);
+---
+
+<BaseLayout
+  title="Renoveringsguider – planera ditt hem med Dobro"
+  description="Guider om planering, tidplan, material, offert och renovering av kök, badrum och hela hem."
+>
+  <section class="wrap editorial-head">
+    <span class="eyebrow">Kunskap inför ditt nästa steg</span>
+    <h1>
+      Ett bättre hem börjar
+      <br /> med bättre frågor.
+    </h1>
+    <p>Konkreta guider som hjälper dig att planera, prioritera och förstå din renovering.</p>
+  </section>
+  <section class="wrap guide-grid">
+    {guides.map((guide) => (
+      <a class="guide-card" href={`/blogg/${guide.id}/`}>
+        <span class="eyebrow">Guide {String(guide.data.order).padStart(2, "0")} · Renovering</span>
+        <h2>{guide.data.title}</h2>
+        <p>{guide.data.description}</p>
+        <span class="textlink">Läs guiden</span>
+      </a>
+    ))}
+  </section>
+  <ContactSection />
+</BaseLayout>

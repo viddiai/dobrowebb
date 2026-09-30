@@ -1,0 +1,59 @@
+---
+import { getCollection, type CollectionEntry } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import ContactSection from "../../components/ContactSection.astro";
+
+export async function getStaticPaths() {
+  const guides = await getCollection("blogg");
+  return guides.map((guide) => ({ params: { slug: guide.id }, props: { guide } }));
+}
+
+interface Props {
+  guide: CollectionEntry<"blogg">;
+}
+
+const { guide } = Astro.props;
+const { title, description } = guide.data;
+
+// Varje "## Rubrik" i guiden blir en egen <section id="avsnitt-N"> (styls av .article-body section)
+// och en länk i innehållsförteckningen.
+const sections = (guide.rendered?.html ?? "")
+  .split(/(?=<h2[\s>])/)
+  .map((part) => part.trim())
+  .filter((part) => part.startsWith("<h2"))
+  .map((html) => ({ html, heading: html.match(/<h2[^>]*>(.*?)<\/h2>/s)?.[1] ?? "" }));
+---
+
+<BaseLayout title={title} description={description}>
+  <section class="wrap editorial-head">
+    <span class="eyebrow">Planera din renovering</span>
+    <h1>{title}</h1>
+    <p>{description}</p>
+  </section>
+  <div class="wrap article-layout">
+    <aside>
+      <span class="eyebrow">I den här guiden</span>
+      {sections.map((section, i) => (
+        <a href={`#avsnitt-${i + 1}`} set:html={section.heading} />
+      ))}
+      <a class="textlink" href="/kontakt/">
+        Prata om ditt projekt
+      </a>
+    </aside>
+    <article class="article-body">
+      {sections.map((section, i) => (
+        <section id={`avsnitt-${i + 1}`} set:html={section.html} />
+      ))}
+    </article>
+  </div>
+  <section class="wrap article-next">
+    <h3>Fortsätt planera ditt hem</h3>
+    <a class="textlink" href="/blogg/">
+      Alla renoveringsguider
+    </a>
+    <a class="textlink" href="/prisguide/">
+      Så fungerar pris & offert
+    </a>
+  </section>
+  <ContactSection />
+</BaseLayout>

@@ -1,0 +1,28 @@
+---
+import type { Project } from "../data/projekt";
+
+interface Props {
+  project: Project;
+}
+
+const { project } = Astro.props;
+const { title, description, category, place, weeks, image } = project.data;
+---
+
+<article class="case-card" data-category={category}>
+  <a href={`/projekt/${project.id}/`}>
+    <img
+      src={image}
+      alt={`${title} – projektbild från Dobro`}
+      loading="lazy"
+      width="800"
+      height="608"
+    />
+    <span class="eyebrow">
+      {category} · {place} · {weeks} veckor
+    </span>
+    <h2>{title}</h2>
+    <p>{description}</p>
+    <span class="textlink">Se projektet</span>
+  </a>
+</article>
