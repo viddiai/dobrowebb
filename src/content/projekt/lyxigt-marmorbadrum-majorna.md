@@ -5,6 +5,7 @@ category: Badrum
 place: Majorna
 weeks: 4
 image: /assets/majorna.webp
+beforeImage: /assets/majorna-fore.webp
 quote: "Höll både tidsplan och budget. Kan varmt rekommendera!"
 order: 1
 ---
