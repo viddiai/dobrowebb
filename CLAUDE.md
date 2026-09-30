@@ -42,6 +42,7 @@ src/components/
   ContactSection.astro    Kontaktsektion + formulär #request-form (+ skript som postar till /api/lead/)
   FaqSection.astro        Gemensam FAQ (data i src/data/faq.ts)
   CaseCard.astro          Projektkort (projektlista + "Fler hem")
+  BeforeAfter.astro       Före/efter-slider på projekt-case (styrs av beforeImage)
 src/data/faq.ts           FAQ-frågor – visas på sidan OCH i FAQPage-JSON-LD
 src/data/projekt.ts       getProjects() (sorterad), kategori → tjänstesida
 src/content/projekt/*.md  Ett projekt-case per fil
@@ -72,6 +73,7 @@ place: Majorna
 weeks: 4
 image: /assets/majorna.webp # lägg bilden i public/assets/
 quote: "Kundcitat utan citattecken" # valfritt
+beforeImage: /assets/majorna-fore.webp # valfritt – ger före/efter-slider (efter = image)
 order: 8 # plats i projektlistan
 ---
 

@@ -1,6 +1,7 @@
 ---
 import { render } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import BeforeAfter from "../../components/BeforeAfter.astro";
 import CaseCard from "../../components/CaseCard.astro";
 import { getProjects, serviceByCategory, type Project } from "../../data/projekt";
 
@@ -22,7 +23,7 @@ interface Props {
 }
 
 const { project, related } = Astro.props;
-const { title, description, category, place, weeks, image, quote } = project.data;
+const { title, description, category, place, weeks, image, beforeImage, quote } = project.data;
 const service = serviceByCategory[category];
 const { Content } = await render(project);
 ---
@@ -45,13 +46,17 @@ const { Content } = await render(project);
         <p style="margin-bottom:35px">Kundens ord om projektet i {place}</p>
       </>
     )}
-    <img
-      class="case-cover"
-      src={image}
-      alt={`${title} – projektbild från Dobro`}
-      width="1200"
-      height="900"
-    />
+    {beforeImage ? (
+      <BeforeAfter before={beforeImage} after={image} label={title} />
+    ) : (
+      <img
+        class="case-cover"
+        src={image}
+        alt={`${title} – projektbild från Dobro`}
+        width="1200"
+        height="900"
+      />
+    )}
     <div class="project-facts">
       <div>
         <small>Projekt</small>

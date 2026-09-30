@@ -13,6 +13,8 @@ const projekt = defineCollection({
     weeks: z.number().int().positive(),
     /** Sökväg under public/, t.ex. /assets/askim.webp */
     image: z.string(),
+    /** Valfri före-bild. Finns den visas en före/efter-slider (efter = image) i stället för bilden. */
+    beforeImage: z.string().optional(),
     /** Kundcitat, utan citattecken. */
     quote: z.string().optional(),
     /** Sorteringsordning i projektlistan. */
